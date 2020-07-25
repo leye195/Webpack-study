@@ -498,3 +498,15 @@ module.exports={
 ```
 
 ##### Source Map
+
+배포용으로 빌드한 파일과 원본을 연결시켜주는 기능.
+서버에 배포를 할 때 성능 최적화를 위해 HTML,CSS,JavaScript 같은 웹자원들을 압축해주는데 만약 압축하여 배포한 파일에 에러가 난다면 소스맵을 통해 배포용 파일의 특정 부분이 원본 소스의 어떤 부분인지 확인해준다.
+
+```
+module.exports={
+    devtool:"cheap-eval-source-map"
+}
+```
+
+devtool 속성을 추가하고 소스 맵 설정 옵션 중 하나를 선택해 지정해주면 된다.
+[참고] https://webpack.js.org/configuration/devtool/#devtool

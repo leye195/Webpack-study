@@ -1,6 +1,8 @@
 const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+
 module.exports = {
 	mode: "none",
 	entry: "./src/index.js",
@@ -30,13 +32,10 @@ module.exports = {
 				test: /\.scss$/,
 				use: [
 					{
-						loader:
-							process.env.NODE_ENV !== "production"
-								? "style-loader"
-								: MiniCssExtractPlugin.loader,
+						loader: MiniCssExtractPlugin.loader,
 					},
 					{ loader: "css-loader" },
-					{ loader: "sass-loader" },
+					{ loader: "sass-loader", options: {} },
 				],
 			},
 			{
