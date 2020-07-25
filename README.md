@@ -332,13 +332,13 @@ module.exports={
 ```
 
 module의 rules배열에 추가되는 객체에는 2가지 속성이 포함되어 있는데
---> test: loader를 적용할 파일 유형 (정규표현식 활용)
---> use: 해당 파일에 적용할 loader 이름
+
+- test: loader를 적용할 파일 유형 (정규표현식 활용)
+- use: 해당 파일에 적용할 loader 이름
 
 css-loader 외에도 자주 사용되는 loader 정보는 다음과 같다.
 
-- babel-loader
-  babel-loader @babel/core @babel/preset-env
+- babel-loader (npm i babel-loader @babel/core @babel/preset-env -D)
 
 ```
 module:{
@@ -355,9 +355,7 @@ module:{
 }
 ```
 
-- sass-loader
-  sass-loader sass node-sass or dart-sass
-  mini-css-extract-plugin
+- sass-loader (npm i sass-loader sass (node-sass or dart-sass) mini-css-extract-plugin -D)
 
 ```
 //For production builds it's recommended to extract the CSS
@@ -415,8 +413,7 @@ module.exports={
 }
 ```
 
-- ts-loader
-  npm install --save-dev typescript ts-loader
+- ts-loader (npm install --save-dev typescript ts-loader)
 
 ###### loader 적용 순서
 
