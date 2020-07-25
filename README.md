@@ -454,6 +454,32 @@ plugins 배열에는 생성자 함수로 생성한 객체 인스턴스만 추가
 5. 기타 resolve, devServer, devtool
    resolve: webpack이 알아서 경로나 확장자를 처리할 수 있게 해주는 옵션
 
+##### resolve
+
+import 경로의 길이를 줄여주는 기능을 수행해준다.
+
+```
+module.exports = {
+  //...
+  resolve: {
+    // configuration options
+    alias:{
+      Utilities: path.resolve(__dirname, 'src/utilities/'),
+	  Templates: path.resolve(__dirname, 'src/templates/'),
+	  '@': path.resolve(__dirname, 'src/')
+    }
+  }
+};
+
+import main from "../../../main.js"
+-> import main from "@/main.js";
+
+import Utility from "../../../utilities/Utility";
+-> import Utility from "Utilities/Utility";
+```
+
+경로를 깔끔하게 바꿔줄수 있다.
+
 ##### Webpack Dev Server
 
 webpack의 빌드 대상 파일이 변경되었을 때 매번 webpack 명령어를 실행하지 않아도 코드만 변경하고 저장하면 webpack으로 build 한 뒤 브라우저를

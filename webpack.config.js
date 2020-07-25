@@ -9,6 +9,7 @@ module.exports = {
 	output: {
 		filename: "bundle.js",
 		path: path.resolve(__dirname, "dist"),
+		publicPath: "/dist/",
 	},
 	devServer: {
 		port: 9000,
@@ -39,17 +40,21 @@ module.exports = {
 				],
 			},
 			{
-				test: /\.(png|jpe?g|gif)$/i,
+				test: /\.(png|jpe?g|gif|svg)$/i,
 				use: [
 					{
 						loader: "file-loader",
 						options: {
 							outputPath: "images",
+							name: "[name].[ext]?[hash]",
 						},
 					},
 				],
 			},
 		],
+	},
+	resolve: {
+		extentions: ["*", ".js"], //확장자 없이 불러오도록 설정 가능
 	},
 	plugins: [
 		new MiniCssExtractPlugin({
