@@ -509,4 +509,5 @@ module.exports={
 ```
 
 devtool 속성을 추가하고 소스 맵 설정 옵션 중 하나를 선택해 지정해주면 된다.
-[참고] https://webpack.js.org/configuration/devtool/#devtool
+
+- [참고] https://webpack.js.org/configuration/devtool/#devtool
