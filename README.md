@@ -1,4 +1,4 @@
-# 웹팩 및 vscode 유용 패키지
+b# 웹팩 및 vscode 유용 패키지
 
 ### VScode
 
@@ -10,7 +10,7 @@
 
 #### Prettier
 
-code를 설정한 규칙대로 보기 좋게 정리해주는 도구 (formatting 특화)
+code를 설정한 규칙대로 보기 좋게 정리해주는 도구 (formatting 특화)  
 .prettierrc 파일안에 규칙 설정
 
 ```
@@ -26,7 +26,7 @@ code를 설정한 규칙대로 보기 좋게 정리해주는 도구 (formatting 
 
 #### ESLint
 
-문법을 자동으로 수정해주기 위해 사용하며 prettier와 같이 사용된다. (formatting,문법수정)
+문법을 자동으로 수정해주기 위해 사용하며 prettier와 같이 사용된다. (formatting,문법수정)  
 .eslintrc 혹은 package.json의 eslintConfig필드에 작성
 
 - ESLint는 3가지 영역으로 나누어 구성한다.
@@ -56,7 +56,7 @@ ESLint 사용을 위해 지원하는 JavaScript 언어 옵션을 지정가능
 
 ##### parser
 
-ESLint 구문 분석을 위해 기본적으로 Espree 파서를 활용
+ESLint 구문 분석을 위해 기본적으로 Espree 파서를 활용  
 Babel과 같이 사용되는 파서로는 babel-eslint가 있고 typescript 구문 분석을 위해 사용되는 @typescript-eslint/parser가 있다.
 
 ```
@@ -68,7 +68,7 @@ Babel과 같이 사용되는 파서로는 babel-eslint가 있고 typescript 구�
 
 ##### env
 
-env는 사전 정의된 전역변수 사용을 정의한다.
+env는 사전 정의된 전역변수 사용을 정의한다.  
 자주 사용되는 설정으로는 browser와 node가 있다.
 
 ```
@@ -95,15 +95,15 @@ ESLint에서 선언되지 않은 전역변수에 대해서 경고가 발생하�
 
 ##### plugin
 
-ESLint는 서드파티 플러그인 사용을 지원
+ESLint는 서드파티 플러그인 사용을 지원  
 플러그인을 설치한뒤 plugins에 추가해 사용가능
 
 플러그인을 추가할때는 eslint-plugin을 생략가능
 
 ##### extends
 
-추가한 플러그인에서 사용할 규칙을 설정한다.
-플러그인은 일련의 규칙 집합이며, 플러그인을 추가해도 규칙은 적용되지 않는다.
+추가한 플러그인에서 사용할 규칙을 설정한다.  
+플러그인은 일련의 규칙 집합이며, 플러그인을 추가해도 규칙은 적용되지 않는다.  
 규칙을 적용하기 위해서는 추가한 플러그인 중, 사용할 규칙을 추가해주어 적용하면 된다.
 
 ```
@@ -132,7 +132,7 @@ ESLint는 서드파티 플러그인 사용을 지원
 
 ##### rules
 
-ESLint에는 프로젝트에 사용하는 규칙을 수정 할 수 있다.
+ESLint에는 프로젝트에 사용하는 규칙을 수정 할 수 있다.  
 규칙을 변경하는 경우 다음과 같이 설정해줘야 된다.
 
 - "off" or 0 : 규칙사용 않함
@@ -207,7 +207,7 @@ module.exports={
 }
 ```
 
-entry에 지정된 파일에는 웹 어플리케이션의 전반적인 구조와 내용이 담겨 있어야 한다.
+entry에 지정된 파일에는 웹 어플리케이션의 전반적인 구조와 내용이 담겨 있어야 한다.  
 webpack이 해당 파일을 가지고 웹 어플리케이션에서 사용되는 모듈들의 연관관계를 이해하고 분석하기 때문에 애플리케이션을 동작시킬수 있는
 내용이 담겨져있어야 한다.
 
@@ -417,7 +417,7 @@ module.exports={
 
 ###### loader 적용 순서
 
-특정 파일에 여러 개의 로더를 사용하는 경우 로더가 적용되는 순서에 주의해야 한다.
+특정 파일에 여러 개의 로더를 사용하는 경우 로더가 적용되는 순서에 주의해야 한다.  
 loader는 기본적으로 오른쪽에서 왼쪽 순으로 적용된다.
 
 ```
@@ -430,7 +430,7 @@ module.exports={
 
 ```
 
-4. plugin: webpack의 기본적인 동작에 추가적인 기능을 제공하는 속성, loader와 비교하면
+4. plugin: webpack의 기본적인 동작에 추가적인 기능을 제공하는 속성, loader와 비교하면<br/>
    loader는 파일을 해석하고 변환하는 과정에 관여하는 반면, plugin은 해당 결과물의 형태를 바꾸는 역활을 한다고 보면 된다.
 
 ```
@@ -482,8 +482,8 @@ import Utility from "../../../utilities/Utility";
 
 ##### Webpack Dev Server
 
-webpack의 빌드 대상 파일이 변경되었을 때 매번 webpack 명령어를 실행하지 않아도 코드만 변경하고 저장하면 webpack으로 build 한 뒤 브라우저를
-새로고침 해준다.
+webpack의 빌드 대상 파일이 변경되었을 때 매번 webpack 명령어를 실행하지 않아도 코드만 변경하고 저장하면 <br/>
+webpack으로 build 한 뒤 브라우저를 새로고침 해준다.
 
 매번 명령어를 치는 시간과 브라우저를 새로고침하는 시간 뿐만 아니라 웹팩 빌드 시간 또한 줄여주기 때문에 webpack기반의 웹 애플리케이션 개발에 필수로 사용된다.
 
@@ -494,17 +494,42 @@ webpack의 빌드 대상 파일이 변경되었을 때 매번 webpack 명령어�
 }
 ```
 
-webpack-dev-server를 실행해 webpack 빌드를 하는 경우 빌드한 결과물이 파일 탐색기나 프로젝트 파일에서 보이지 않는다.
-build한 결과물은 메모리에 저장되고 파일로 생성되지 않기 때문에 컴퓨터 내부적으로 접근은 가능하나 직접 눈으로 보고 파일을 조작할수는 없다.
+webpack-dev-server를 실행해 webpack 빌드를 하는 경우 빌드한 결과물이 파일 탐색기나 프로젝트 파일에서 보이지 않는다.<br/>
+build한 결과물은 메모리에 저장되고 파일로 생성되지 않기 때문에 컴퓨터 내부적으로 접근은 가능하나 직접 눈으로 보고 파일을 조작할수는 없다.<br/>
 따라서 webpack-dev-server는 개발때만 사용하다가 개발이 완료되면 웹팩 명령을 통해 결과물을 파일로 생성한다.
 
 ```
 module.exports={
     "devServer":{
-        port:9000
+        port:9000, //개발 서버 포트 설정,
+        historyApiFallBack:true/false
+        //html5의 history api를 사용하는 경우 url이외 url 경로로 접근시 404 response를 받게 되는데 이때도 index.html를 //////서빙할지 결정하는 옵션. SPA 개발시 설정.
+        overlay:true/false, //에러나 경고를 풀스크린으로 브라우저에 오버레이로 표시한다.
+        proxy:""
+        //호출하는 외부 api나 다른 포트를 사용하는 로컬 api가 있을경우 api url들을 해당 서버로 호출하도록 우회할 수 있게 만드는 옵션
     }
 }
 ```
+
+##### historyApiFallBack
+
+```
+module.exports={
+    "devServer":{
+        historyApiFallBack:true
+        or
+        historyApiFallBack:{
+            rewrites:[
+
+            ]
+        }
+    }
+}
+```
+
+historyApiFallBack에 true 값을 주게 되면 모든 404에 대해 index.html로 redirect를 하고 rewrites 옵션에 담은 객체를 정규표현식을 통해 더 복잡한 경우를 다룰수 있다.
+
+개발서버를 실행할때 명령어 인자로 --progress를 입력하면 build 진행률을 보여준다. build 시간이 길어질경우 사용하면 좋다.
 
 ##### HMR (Hot Module Replacement)
 

@@ -13,12 +13,15 @@ module.exports = {
   },
   devServer: {
     port: 9000,
+    historyApiFallback: true,
+    overlay: true,
     hot: true,
   },
+  devtool: "inline-source-map",
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: [
           {
@@ -54,7 +57,8 @@ module.exports = {
     ],
   },
   resolve: {
-    extentions: ["*", ".js"], //확장자 없이 불러오도록 설정 가능
+    modules: ["node_modules"],
+    extensions: [".js", ".json"], //확장자 없이 불러오도록 설정 가능
   },
   plugins: [
     new MiniCssExtractPlugin({
