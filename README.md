@@ -531,6 +531,70 @@ historyApiFallBack에 true 값을 주게 되면 모든 404에 대해 index.html�
 
 개발서버를 실행할때 명령어 인자로 --progress를 입력하면 build 진행률을 보여준다. build 시간이 길어질경우 사용하면 좋다.
 
+##### API 연동
+
+웹팩 개발 서버 설정 중 before 속성은 웹팩 서버에 기능을 추가할 수 있는 여지를 제공 (devServer.before)
+```
+// webpack.config.js
+module.exports = {
+  devServer: {
+    before: (app, server, compiler) => {
+      app.get("/api/keywords", (req, res) => {
+        res.json([
+          { keyword: "이탈리아" },
+          { keyword: "세프의요리" },
+          { keyword: "제철" },
+          { keyword: "홈파티" },
+        ])
+      })
+    },
+  },
+}
+```
+
+connect-api-mocker
+`npm i connect-api-mocket -D`
+
+
+```
+GET.json: (POST, PUT, DELETE 도 지원)
+
+[
+  { "keyword": "이탈리아" },
+  { "keyword": "세프의요리" },
+  { "keyword": "제철" },
+  { "keyword": "홈파티 " }
+]
+
+// webpack.config.js:
+const apiMocker = require("connect-api-mocker")
+
+module.exports = {
+  devServer: {
+    before: (app, server, compiler) => {
+      app.use(apiMocker("/api", "mocks/api"))
+    },
+  },
+}
+첫번째 인자는 설정할 라우팅 경로인데 /api로 들어온 요청에 대해 처리하겠다는 의미다. 
+두번째 인자는 응답으로 제공할 목업 파일 경로인데 방금 만든 mocks/api 경로를 전달함
+```
+
+devServer.proxy
+api 서버를 로컬환경에서 띄운 다음 목업이 아닌 이 서버에 직접 api 요청
+
+```
+// 웹팩 개발 서버에서 api 서버로 프록싱
+// webpack.config.js
+module.exports = {
+  devServer: {
+    proxy: {
+      "/api": "http://localhost:8081", // 프록시
+    },
+  },
+}
+```
+
 ##### HMR (Hot Module Replacement)
 
 브라우저를 새로고침하지 않아도 웹팩으로 빌드한 결과물이 웹 애플리케이션에 실시간으로 반영되도록 도와주는 설정
