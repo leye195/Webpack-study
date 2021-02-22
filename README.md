@@ -1,4 +1,4 @@
-b# 웹팩 및 vscode 유용 패키지
+# 웹팩 및 vscode 유용 패키지
 
 ### VScode
 
@@ -338,7 +338,27 @@ module의 rules배열에 추가되는 객체에는 2가지 속성이 포함되�
 
 css-loader 외에도 자주 사용되는 loader 정보는 다음과 같다.
 
+- style-loader (npm i style-loader -D)
+자바스크립트로 변경된 스타일을 dom 추가해줌, css를 번들링 하기 위해서는 css-loader와 style-loader를 함께 사용함.
+```
+module.exports = {
+  module: {
+    rules:[{
+      test: /\.css$/,
+      use: ['style-loader','css-loader']
+    }]
+  }
+}
+//css 파일을 읽어들여 css-loader를 적용하고 style-loader를 적용
+```
+
+
 - babel-loader (npm i babel-loader @babel/core @babel/preset-env -D)
+  - preset-env
+  - preset-flow
+  - preset-react
+  - preset-typescript
+
 
 ```
 module:{
@@ -353,6 +373,8 @@ module:{
         }
     }]
 }
+
+//폴리필 사용 설정 한 경우 core-js 설치 필요 
 ```
 
 - sass-loader (npm i sass-loader sass (node-sass or dart-sass) mini-css-extract-plugin -D)
@@ -392,24 +414,43 @@ module.exports={
 ```
 
 - file-loader
+모든 파일을 모듈 처럼 사용할 수 있도록 해줌, 파일을 모듈 형태로 지원하고 웹팩 아웃풋에 파일을 옮겨주는 일을 함.
 
 ```
 module.exports={
     module:{
         rules:[
             {
-                test:/\.(png|jp?eg|gif)$/i,
+                test:/\.(png|jp?eg|gif|svg)$/i,
                 use:[
                   {
                     loader:"file-loader"
                     options:{
-                        outputPath:"images"
+                      publicPath:"./dist/images", //아웃풋 경로 설정
+		      name:"[name].[ext]",  //파일 형식
                     }
                   }
                 ]
             }
         ]
     }
+}
+```
+
+- url-loader (npm i url-loader -D)
+페이지에서 여러개의 이미지를 사용한다면 Data URI Schema를 이용하는 방법이 더 나은 경우가 있는데, 이미지를 Base64로 인코딩하여 문자열 형태로 소스코드에 넣는 형식을 자동화 해줌.
+```
+module.exports = {
+  module: {
+    rules:[{
+      loader:"url-loader",
+      options:{
+        publicPath: "./dist",
+	name: "[name].[ext]",
+	limit: 5000 //5kb 이하인 경우 data url 처리
+      }
+    }]
+  }
 }
 ```
 
@@ -446,8 +487,66 @@ plugins 배열에는 생성자 함수로 생성한 객체 인스턴스만 추가
 
 ###### 자주 사용되는 Plugin
 
+- webpack.DefinePlugin //환경 정보 제공
+```
+const webpack = require('webpack');
+
+export default {
+  plugins: [new webpack.DefinePlugin({})] //기본적으로 노드 환경 정보 NODE_ENV 값을 mode 값으로 넣어줌
+}
+
+```
+
+- html-webpack-plugin //html 후처리하는데 사용, 웹팩으로 빌드한 결과물을 자동으로 로딩하는 코드를 주입해줌, script 주입 코드 필요 없음 
+```
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+module.exports {
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './src/index.html', // 템플릿 경로를 지정
+      templateParameters: { // 템플릿에 주입할 파라매터 변수 지정
+        env: process.env.NODE_ENV === 'development' ? '(개발용)' : '',
+      },
+    })
+  ]
+}
+```
+- clean-webpack-plugin //이전 빌드 결과물을 제거해줌.
+```
+const {CleanWebpackPlugin} = require("clean-webpack-plugin");
+
+module.exports = {
+  plugins: [
+    new CleanWebpackPlugin(),
+  ]
+}
+```
+- mini-css-extract-plugin //css를 변도 파일로 뽑아내는 플러그인 
+```
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+module.exports = {
+  module: {
+    rules: [{
+      test: /\.css$/,
+      use: [
+        process.env.NODE_ENV === "production" ?
+	MiniExtractPlugin.loader :
+	"style-loader",
+	"css-loader",
+      ]
+    }]
+  },
+  pluglins: [
+    ...(process.env.NODE_ENV === "production"
+      ? [new MiniCssExtractPlugin({ filename: `[name].css` })]
+      : []), //filename에 설정한 값으로 아웃풋 경로에 css 파일이 생성됨
+  ]
+}
+```
+
+
 - split-chunks-plugin
-- clean-webpack-plugin
 - image-webpack-loader
 - webpack-bundle-analyzer-plugin
 
